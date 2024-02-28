@@ -49,11 +49,17 @@ module.exports = () => {
         ],
         screenshots: [
           {
-            src: "src/images/logo.png",
-            sizes: "640x320",
-            type: "image/gif",
+            src: "assets/icons/icon_512x512.png",
+            sizes: "512x512",
+            type: "image/png",
             form_factor: "wide",
-            label: "Wonder Widgets",
+            label: "text editor",
+          },
+          {
+            src: "assets/icons/icon_384x384.png",
+            sizes: "384x384",
+            type: "image/png",
+            label: "text editor",
           },
         ],
       }),

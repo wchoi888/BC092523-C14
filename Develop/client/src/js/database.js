@@ -44,8 +44,12 @@ export const getDb = async () => {
 
     // Get confirmation of the request.
     const result = await request;
-    const position = result.length;
-    return result[position].content;
+    const position = result.length - 1;
+    if (result.length === 0) {
+      return result;
+    } else {
+      return result[position].content;
+    }
   } catch (error) {
     console.error("getDb not implemented", error);
   }
