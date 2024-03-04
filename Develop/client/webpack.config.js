@@ -8,16 +8,21 @@ const { InjectManifest } = require("workbox-webpack-plugin");
 
 module.exports = () => {
   return {
+    // Set the mode to development
     mode: "development",
+    // Define entry points for the main JavaScript files
     entry: {
       main: "./src/js/index.js",
       install: "./src/js/install.js",
     },
+    // Define output settings
     output: {
       filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
     },
+    // Define webpack plugins
     plugins: [
+      // Generate HTML files with correct links to generated bundles
       new HtmlWebpackPlugin({
         template: "./index.html",
         title: "Text Editor",
@@ -41,6 +46,7 @@ module.exports = () => {
         start_url: "./",
         publicPath: "./",
         icons: [
+          // Array of icons for various sizes
           {
             src: path.resolve("./src/images/logo.png"),
             sizes: [96, 128, 192, 256, 384, 512],
@@ -48,6 +54,7 @@ module.exports = () => {
           },
         ],
         screenshots: [
+          // Array of screenshots for the PWA
           {
             src: "assets/icons/icon_512x512.png",
             sizes: "512x512",
@@ -64,14 +71,17 @@ module.exports = () => {
         ],
       }),
     ],
-
+    // Define webpack module settings
     module: {
+      // Define rules for processing different file types
       rules: [
+        // Rule for processing CSS files
         {
           test: /\.css$/i,
           use: ["style-loader", "css-loader"],
         },
         {
+          // Rule for processing JavaScript files
           test: /\.m?js$/,
           exclude: /node_modules/,
           // We use babel-loader in order to use ES6.
@@ -80,6 +90,7 @@ module.exports = () => {
             options: {
               presets: ["@babel/preset-env"],
               plugins: [
+                // Additional plugins for Babel
                 "@babel/plugin-proposal-object-rest-spread",
                 "@babel/transform-runtime",
               ],

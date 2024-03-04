@@ -1,18 +1,21 @@
 import { openDB } from "idb";
-
+// Function to initialize the IndexedDB database
 const initdb = async () =>
   openDB("jate", 1, {
+    // Upgrade function to handle database version changes
     upgrade(db) {
+      // Check if the database already exists
       if (db.objectStoreNames.contains("jate")) {
         console.log("jate database already exists");
         return;
       }
+      // If not, create a new object store named "jate"
       db.createObjectStore("jate", { keyPath: "id", autoIncrement: true });
       console.log("jate database created");
     },
   });
 
-// TODO: Add logic to a method that accepts some content and adds it to the database
+// Add logic to a method that accepts some content and adds it to the database
 export const putDb = async (content) => {
   try {
     const db = await openDB("jate", 1);
@@ -25,7 +28,7 @@ export const putDb = async (content) => {
   }
 };
 
-// TODO: Add logic for amethod that gets all the content from the database
+// Add logic for amethod that gets all the content from the database
 export const getDb = async () => {
   try {
     console.log("GET from the database");
@@ -54,5 +57,5 @@ export const getDb = async () => {
     console.error("getDb not implemented", error);
   }
 };
-
+// Initialize the database when the script is loaded
 initdb();
